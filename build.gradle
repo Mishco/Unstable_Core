@@ -25,6 +25,10 @@ dependencies {
     def junit4Version = '4.12'
     def junitBomVersion = '5.5.0'
 
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.8'
+    annotationProcessor 'org.projectlombok:lombok:1.18.8'
+
     testImplementation(platform("org.junit:junit-bom:$junitBomVersion"))
 
     // JUnit Jupiter API and TestEngine implementation
@@ -39,14 +43,6 @@ dependencies {
         because 'allows tests to run from IDEs that bundle older version of launcher'
     }
 
-//    testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.2'
-//    testImplementation 'org.hamcrest:hamcrest:2.1'
-//
-//    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "5.1.0"
-//    testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: "1.1.0"
-
-
-    //testCompile group: 'junit', name: 'junit', version: '4.12'
 
 }
 test {

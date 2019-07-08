@@ -1,11 +1,16 @@
 package com.mishco.core;
 
-import java.util.*;
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 
 import static com.mishco.helper.Util.FULL_REACTIVITY;
 import static com.mishco.helper.Util.MAX_CORE_POWER;
 
+@Slf4j
 public class Core implements Runnable {
 
     private final BlockingQueue<Double> temperatureQueue;
@@ -19,6 +24,10 @@ public class Core implements Runnable {
     private Boolean forceStop;
     private Set<ControlRods> controlRodsInCore;
 
+    private Double inputPower;
+    private Double outputPower; // should be the same as actualPower
+
+
     private boolean accumulation;
     private boolean reducing;
 
@@ -26,7 +35,7 @@ public class Core implements Runnable {
         this.temperatureQueue = temperatureQueue;
         this.powerQueue = powerQueue;
         this.temperatureInCore = (double) new Random().nextInt(MAX_CORE_POWER - 1) + 1;
-        this.reactivity = Double.valueOf(FULL_REACTIVITY / 2);   //(double) new Random().nextInt(FULL_REACTIVITY) + 1; // reactivity from 0 to 100 %, due to set the rods
+        this.reactivity = FULL_REACTIVITY / 2.0;   // reactivity from 0 to 100 %, due to set the rods
         this.actualPower = (double) new Random().nextInt(MAX_CORE_POWER - 1) + 1;
         this.accumulation = true;
         this.reducing = false;
@@ -39,7 +48,9 @@ public class Core implements Runnable {
         try {
             reaction();
         } catch (InterruptedException e) {
+            //log.warn();
             System.err.println("Temperatur producer interrupted: " + e.getLocalizedMessage());
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -52,6 +63,7 @@ public class Core implements Runnable {
             } catch (InterruptedException e) {
                 running = false;
                 System.err.println("Temperatur producer interrupted: " + e.getLocalizedMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
@@ -75,7 +87,6 @@ public class Core implements Runnable {
         } else if (reactivity < FULL_REACTIVITY / 2) {
             accumulation = false;
             reducing = true;
-            //increase = -increase;
         } else {
             throw new IllegalStateException("Unexpected value: " + reactivity);
         }
@@ -113,8 +124,6 @@ public class Core implements Runnable {
     }
 
     public void removeFromSetOfControlRods(int hashCodeOfControlRod) {
-        //Optional<ControlRods> cr = controlRodsInCore.stream().filter(controlRods1 -> controlRods1.getId() == hashCodeOfControlRod).findAny();
-
         for (ControlRods actControlRods : controlRodsInCore) {
             if (actControlRods.getId() == hashCodeOfControlRod) {
                 controlRodsInCore.remove(actControlRods);
@@ -155,6 +164,22 @@ public class Core implements Runnable {
         this.forceStop = forceStop;
     }
 
+
+    public Double getInputPower() {
+        return inputPower;
+    }
+
+    public void setInputPower(Double inputPower) {
+        this.inputPower = inputPower;
+    }
+
+    public Double getOutputPower() {
+        return outputPower;
+    }
+
+    public void setOutputPower(Double outputPower) {
+        this.outputPower = outputPower;
+    }
 
     public boolean hasControlRods() {
         return !controlRodsInCore.isEmpty();
