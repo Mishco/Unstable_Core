@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1840.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mishco.controller.Controller">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="578.0" layoutX="81.0" layoutY="323.0"
+                   stroke="BLACK" strokeType="INSIDE" width="382.0"/>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="566.0" layoutX="634.0" layoutY="327.0"
+                   stroke="BLACK" strokeType="INSIDE" width="412.0"/>
+        <Text layoutX="249.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Core">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <Text layoutX="810.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Generator">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <GridPane layoutX="81.0" layoutY="921.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label text="Temperature"/>
+                <Label text="Power" GridPane.rowIndex="1"/>
+                <Label text="Control Rods" GridPane.rowIndex="2"/>
+                <Label fx:id="labelValTemperature" text="ValTemperatur" GridPane.columnIndex="1"/>
+                <Label fx:id="labelValPower" text="ValPower" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="labelValControlRods" text="ValControlRods" GridPane.columnIndex="1"
+                       GridPane.rowIndex="2"/>
+            </children>
+        </GridPane>
+        <TextArea fx:id="console" layoutX="302.0" layoutY="921.0" prefHeight="83.0" prefWidth="739.0"/>
+        <ProgressBar fx:id="progressBarTemperature" layoutX="-215.0" layoutY="624.0" prefHeight="20.0" prefWidth="537.0"
+                     progress="0.0" rotate="-90.0"/>
+        <Label layoutX="14.0" layoutY="362.0" text="MAX"/>
+        <Label layoutX="14.0" layoutY="885.0" text="MIN"/>
+        <GridPane gridLinesVisible="true" layoutX="81.0" layoutY="45.0" prefHeight="226.0" prefWidth="382.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onActionUpControlRods1"
+                                text="UP"/>
+                        <Label text="Control Rods 1"/>
+                        <Button mnemonicParsing="false" onAction="#onActionDownControlRods1" text="DOWN"/>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onActionUpControlRods2"
+                                text="UP"/>
+                        <Label text="Control Rods 2"/>
+                        <Button mnemonicParsing="false" onAction="#onActionDownControlRods2" text="DOWN"/>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onActionUpControlRods3"
+                                text="UP"/>
+                        <Label text="Control Rods 3"/>
+                        <Button mnemonicParsing="false" onAction="#onActionDownControlRods3" text="DOWN"/>
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+        <Rectangle fx:id="controlRod1" arcHeight="5.0" arcWidth="5.0" fill="#868686" height="200.0" layoutX="144.0"
+                   layoutY="456.0" stroke="BLACK" strokeType="INSIDE" width="23.0"/>
+        <Rectangle fx:id="controlRod2" arcHeight="5.0" arcWidth="5.0" fill="#868686" height="200.0" layoutX="261.0"
+                   layoutY="456.0" stroke="BLACK" strokeType="INSIDE" width="23.0"/>
+        <Rectangle fx:id="controlRod3" arcHeight="5.0" arcWidth="5.0" fill="#868686" height="200.0" layoutX="374.0"
+                   layoutY="455.0" stroke="BLACK" strokeType="INSIDE" width="23.0"/>
+        <Pane fx:id="corePanel" layoutX="121.0" layoutY="657.0" prefHeight="200.0" prefWidth="289.0">
+            <children>
+                <HBox prefHeight="200.0" prefWidth="289.0">
+                    <children>
+                        <Rectangle fx:id="fuelUraniumID1" arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle fx:id="fuelUraniumID2" arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle fx:id="fuelUraniumID7" arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle fx:id="fuelUraniumID12" arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK"
+                                   strokeType="INSIDE" width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="200.0" stroke="BLACK" strokeType="INSIDE"
+                                   width="23.0">
+                            <fill>
+                                <LinearGradient cycleMethod="REPEAT" endX="0.4142857142857143" endY="1.0"
+                                                startX="0.41428571428571426">
+                                    <stops>
+                                        <Stop color="#ff5d03"/>
+                                        <Stop color="WHITE" offset="1.0"/>
+                                    </stops>
+                                </LinearGradient>
+                            </fill>
+                        </Rectangle>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+        <Text layoutX="127.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rod 1">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <Text layoutX="243.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rod 2">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <Text layoutX="357.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rod 3">
+            <font>
+                <Font size="22.0"/>
+            </font>
+        </Text>
+        <LineChart fx:id="lineChart" layoutX="1129.0" layoutY="494.0">
+            <xAxis>
+                <NumberAxis side="BOTTOM"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis side="LEFT"/>
+            </yAxis>
+        </LineChart>
+        <Button onAction="#onForceStopClicked" layoutX="523.0" layoutY="45.0" mnemonicParsing="false" text="Force Stop"
+                textFill="WHITE">
+            <effect>
+                <Lighting bumpInput="$null">
+                    <light>
+                        <Light.Distant color="RED"/>
+                    </light>
+                </Lighting>
+            </effect>
+        </Button>
+    </children>
+</AnchorPane>
