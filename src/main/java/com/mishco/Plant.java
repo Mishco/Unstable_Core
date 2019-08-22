@@ -16,11 +16,11 @@ public class Plant {
     }
 
     private void changePower() {
-        coreList.forEach(core -> core.setActualPower(Double.valueOf(new Random().nextInt(MAX_CORE_POWER))));
+        coreList.forEach(core -> core.getGenerator().setOutputPower(Double.valueOf(new Random().nextInt(MAX_CORE_POWER))));
     }
 
     public void makeControlInAllCores() {
-        coreList.forEach(core -> System.out.println(core.getActualPower()));
+        coreList.forEach(core -> System.out.println(core.getGenerator().getOutputPower()));
         changePower();
     }
 

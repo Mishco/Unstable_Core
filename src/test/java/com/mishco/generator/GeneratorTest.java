@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GeneratorTest {
 
-    private static double CAPACITY_CORE = 1000.0;
+
     private Generator generator;
     private Double inputPower = 2000.0; // kW
 
@@ -17,20 +17,17 @@ class GeneratorTest {
     public void setupGeneratorToBasicParameters() {
         generator = Generator.builder()
                 .amountOfWaterPerSecond(11.8)
-                .capacityReactor(CAPACITY_CORE)
-                .capacityWater(10000.0)
-                .temperatureIncomingWater(12.0)
-                .temperatureOutComingWater(100.0)
+
+                .inputPower(inputPower)
+                .outputPower(0.0)
                 .build();
     }
 
     @Test
     public void test_createSimpleGenerator() {
         assertEquals(generator.getAmountOfWaterPerSecond(), 11.8);
-        assertEquals(generator.getCapacityReactor(), CAPACITY_CORE);
-        assertTrue(generator.getCapacityWater() >= CAPACITY_CORE);
-        assertEquals(generator.getTemperatureIncomingWater(), 12.0);
-        assertEquals(generator.getTemperatureOutComingWater(), 100.0);
+        assertEquals(generator.getInputPower(), inputPower);
+        assertEquals(generator.getOutputPower(), 0.0);
     }
 
     @Test

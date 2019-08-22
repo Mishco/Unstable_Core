@@ -85,7 +85,7 @@ public class Controller {
         thread.setDaemon(true);
         thread.start();
 
-        labelValPower.setText(core.getActualPower().toString());
+        labelValPower.setText(core.getGenerator().getOutputPower().toString());
         labelValTemperature.setText(core.getTemperatureInCore().toString());
         labelValControlRods.setText(core.getReactivity().toString());
 
